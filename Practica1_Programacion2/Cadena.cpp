@@ -1,4 +1,5 @@
 #include "..\Practica1_Programacion2\Cadena.h"
+
 	Cadena::Cadena()
 	{
 		int size = 1;
@@ -72,14 +73,13 @@
 	{
 		if (str != NULL)
 		{
-			if (strlen(str) + 1 > size)
+			if (strlen(str) + 1 > size)		//compare lenght of the two strings in case size is smaller than str redo size
 			{
 				delete[] string;
 				Alloc(strlen(str) + 1);
 			}
-			else
-				Clear();
-			strcpy_s(string, size, str);
+			else							//copy str to string
+				strcpy_s(string, size, str);
 		}
 		else
 		{
@@ -102,14 +102,14 @@
 	{
 		if (str != NULL)
 		{
-			if (size <= (strlen(str) + strlen(string)))
+			if (size <= (strlen(str) + strlen(string)))					//if size smaller than the length of srt and string do
 			{
-				char* aux_string = new char [strlen(string)+1];
+				char* aux_string = new char [strlen(string)+1];			//create an auxiliar string to copy string
 				strcpy_s(aux_string, strlen(string), string);
-				Alloc((strlen(str) + 1) + strlen(string));
-				strcpy_s(string, strlen(aux_string), aux_string);
-				strcat_s(string, size, str);
-				delete[] aux_string;
+				Alloc((strlen(str) + 1) + strlen(string));				//this function delete string and redo size
+				strcpy_s(string, strlen(aux_string), aux_string);		//copy the aux string to string
+				strcat_s(string, size, str);							//function to add to string str
+				delete[] aux_string;									//dele aux string from memory
 			}
 			else
 			{
